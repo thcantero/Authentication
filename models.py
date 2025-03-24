@@ -75,11 +75,11 @@ class Feedback(db.Model):
     content = db.Column(db.Text,
                       nullable=False)
     
-    username = db.Column(db.String(20), 
-                         db.ForeignKey('users.username'),
+    user_id = db.Column(db.Integer, 
+                         db.ForeignKey('users.id'),
                          nullable=False)
     
-    user = db.relationship('User', backref="feedback")
+    user = db.relationship('User', backref="feedbacks", cascade='all,delete')
     
     
 def connect_db(app):

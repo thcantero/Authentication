@@ -40,8 +40,18 @@ class UserLogin(FlaskForm):
                                    Length(5)])
     
 
-class Feedback(FlaskForm):
+class Feedback_Form(FlaskForm):
     '''Form to add feedback'''
+    
+    title = StringField('Title',
+                        validators=[InputRequired(message='Field cannot be empty')])
+    
+    content = TextAreaField('Feedback',
+                        validators=[InputRequired(message='Field cannot be empty')])
+    
+
+class Edit_Form(FlaskForm):
+    '''Form to edit an existing feedback'''
     
     title = StringField('Title',
                         validators=[InputRequired(message='Field cannot be empty')])

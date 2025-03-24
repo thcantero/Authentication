@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}User Feedback{% endblock %}
+
+{% block content %}
+
+
+
+<div class='container-fluid vh-100'>
+    <div class='row h-100 g-4'>
+
+        <!-- Left Column: User Card (20% width)-->
+        <div class='col-md-2 d-flex flex-column' style="flex: 0 0 20%; max-width: 20%;">
+            <!-- User Card -->
+            <div class="card flex-fill my-4 mx-2">
+                <div class='card body'>
+                    <h3 class='card-title'>Username: {{ user.username }}</h3>
+                    <p class='card-text'>Email:  {{ user.email }}</p>
+
+                    <div class='d-flex'>
+                        <a href="/users/{{user.username}}/feedback/add" class="btn btn-primary mr-2">New Feedback</a>
+                        <form action="/users/{{user.username}}/delete" method="POST" style="display:inline;">
+                            <button class="btn btn-danger mr-2">Delete User</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    <!-- Right Column: Auto-width Feedback Cards in a wrap -->
+        <div class='col-md-8 d-flex flex-wrap align-items-start my-4 mx-2'>
+            {% for fb in feedback %}
+
+                <!-- Each feedback card, auto-sized -->
+                <div class="card me-3 mb-3" style="width: auto;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><b>{{ fb.title }}</b></h5>
+                        <p class="card-text">{{ fb.content }}</p>
+                        <a href="/users/feedback/{{fb.id}}/update" class="card-link">Edit</a>
+                        <form action="/feedback/{{fb.id}}/delete" method="POST" style="display:inline;">
+                            <button class="btn btn-link card-link text-danger"><i class='bi bi-trash'></i></button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
